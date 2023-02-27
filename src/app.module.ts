@@ -7,6 +7,7 @@ import { ZodValidationPipe } from 'nestjs-zod'
 import { APP_PIPE } from '@nestjs/core'
 import { UsersModule } from './users/users.module'
 import { PrismaModule } from 'nestjs-prisma'
+import { JwtModule } from '@nestjs/jwt'
 
 @Module({
   imports: [PrismaModule.forRoot(), AuthModule, OrdersModule, UsersModule],

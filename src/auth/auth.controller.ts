@@ -1,9 +1,10 @@
-import { Controller } from '@nestjs/common'
+import { Controller, HttpException, HttpStatus } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { Post, Body } from '@nestjs/common'
 import { CredentialsDto } from './dto/login-user.dto'
 import { CreateUserDto } from '../users/dto/create-users.dto'
-
+import { ApiTags } from '@nestjs/swagger'
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor (private readonly authService: AuthService) {}
@@ -14,6 +15,12 @@ export class AuthController {
   }
   @Post('signup')
   async signup (@Body() body: CreateUserDto) {
-    return this.authService.registerUser(body)
+    const user = await this.authService.registerUser(body)
+
+    if (user) return user
+    throw new HttpException(
+      'User could not be registered',
+      HttpStatus.BAD_REQUEST,
+    )
   }
 }
