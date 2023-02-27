@@ -5,14 +5,15 @@ import { OrdersService } from './orders.service'
 import { Private } from 'src/common/decorators/private.decorator'
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard'
 import { Public } from 'src/common/decorators'
+import { Role } from '@prisma/client'
 @ApiTags('Orders')
 @ApiBearerAuth('authorization')
 @Controller('orders')
-@Private(1)
+@Private(Role.Admin)
 export class OrdersController {
   constructor (public readonly ordersService: OrdersService) {}
-  @Public()
-  @Get()
+  /*   @Public()
+   */ @Get()
   async getOrders (@Request() req: Request) {
     return await this.ordersService.getOrders()
   }

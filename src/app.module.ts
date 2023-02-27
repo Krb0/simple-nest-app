@@ -8,9 +8,18 @@ import { APP_PIPE } from '@nestjs/core'
 import { UsersModule } from './users/users.module'
 import { PrismaModule } from 'nestjs-prisma'
 import { JwtModule } from '@nestjs/jwt'
+import { ConfigModule } from '@nestjs/config'
 
 @Module({
-  imports: [PrismaModule.forRoot(), AuthModule, OrdersModule, UsersModule],
+  imports: [
+    ConfigModule.forRoot({
+      envFilePath: `.env.${process.env.NODE_ENV}`,
+    }),
+    PrismaModule.forRoot(),
+    AuthModule,
+    OrdersModule,
+    UsersModule,
+  ],
   controllers: [AppController],
   providers: [
     {
