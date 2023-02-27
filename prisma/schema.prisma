@@ -3,11 +3,13 @@
 
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["linux-musl-openssl-3.0.x"]
+
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgres"
+  url      = env("DATABASE_URL")
 }
 
 model User{
@@ -16,6 +18,7 @@ model User{
   email     String   @unique
   password  String
   orders    Order[]
+  roles     Role
 }
 model Order{
   id        Int      @id @default(autoincrement())
@@ -23,4 +26,11 @@ model Order{
   userId    Int
   token_amount Int
   price_amount Int
+}
+
+enum Role{
+  Public
+  User
+  Mod
+  Admin
 }
