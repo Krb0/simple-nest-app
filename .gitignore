@@ -36,3 +36,7 @@ lerna-debug.log*
 .env
 prisma/dev.db
 docker-compose.yml
+local.env
+production.env
+.env.local
+.env.prod
