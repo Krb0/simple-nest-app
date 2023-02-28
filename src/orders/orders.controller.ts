@@ -3,7 +3,6 @@ import { ApiTags, ApiBearerAuth } from '@nestjs/swagger'
 import { Get, Post } from '@nestjs/common'
 import { OrdersService } from './orders.service'
 import { Private } from 'src/common/decorators/private.decorator'
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard'
 import { Public } from 'src/common/decorators'
 import { Role } from '@prisma/client'
 @ApiTags('Orders')

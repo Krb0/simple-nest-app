@@ -10,7 +10,6 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   }
   canActivate (context: ExecutionContext) {
     const role = this.getRoleMetadata(context)
-    console.log({ role })
     if (!role?.isPrivate) return true
 
     return super.canActivate(context)
